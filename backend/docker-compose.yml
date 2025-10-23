@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: mangal-ws-pg
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: serg
+      POSTGRES_DB: Mangal
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5554:5432"
+
+  app:
+    image: mangal-ws
+    container_name: mangal-app
+    restart: always
+    ports:
+      - "3030:3030"
+    depends_on:
+      - postgres
+    environment:
+      NODE_ENV: production
+      PORT: 3030
+      PSQL_HOST: postgres
+      PSQL_PORT: 5432
+      PSQL_DATABASE: Mangal
+      PSQL_USER: postgres
+      PSQL_PASSWORD: serg
+
+
+    # optional: if you want to rebuild instead of using an image
+    # build: .
+    # command: ["npm", "start"]
+
+volumes:
+  pgdata:

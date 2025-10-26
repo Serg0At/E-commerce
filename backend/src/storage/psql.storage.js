@@ -3,7 +3,6 @@ import { Model } from 'objection';
 import knex from 'knex';
 import knexConfigs from '../../knex.configs';
 
-
 class PSQLStorage {
   static async init() {
     try {

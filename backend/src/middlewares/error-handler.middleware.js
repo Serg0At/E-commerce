@@ -1,15 +1,11 @@
 import http from "http";
 
 import { HttpStatusCodesUtil } from "../utils";
+import logger from "../utils/logger.util.js";
+
+const errorLogger = logger.child({ scope: "ErrorHandlerMiddleware" });
 
 export default class ErrorHandlerMiddleware {
-  /**
-   * @param {Object} error
-   * @param {Object} request
-   * @param {Object} response
-   * @param {Function} next
-   * @description Initialize error handler.
-   */
   static init(error, request, response, next) {
     const ERROR_CASE =
       ErrorHandlerMiddleware.ERROR_CASES[error.status] ||
@@ -26,16 +22,17 @@ export default class ErrorHandlerMiddleware {
       data: error.data,
     };
 
-    if (result.status === 500) {
-      console.log(
-        "Case: ",
-        error.status,
-        error.code,
-        error.name,
-        error.message
-      );
+    if (result.status >= 500) {
+      errorLogger.error("Unhandled error response", {
+        err: error,
+        result
+      });
+    } else {
+      errorLogger.warn("Handled error response", {
+        err: error,
+        result
+      });
     }
-    if (result.status >= 500) console.log(error);
 
     response.status(result.status).json(result);
   }

@@ -14,7 +14,5 @@ export default class Schemes {
       'string.required': 'Password is required',
     })
   });
-
- 
   
 }

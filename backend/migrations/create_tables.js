@@ -124,8 +124,7 @@ function up(pg) {
       table.string('general').notNullable();
       table.dateTime('created_at').defaultTo(pg.fn.now());
   })
-
-
+  
     .createTable('messages', (table) => {
       table.increments('id').primary();
       table.string('name').notNullable();

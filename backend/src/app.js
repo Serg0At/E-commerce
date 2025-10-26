@@ -12,9 +12,9 @@ import config from "./config/variables.config";
 import PSQLStorage from "./storage/psql.storage";
 import ErrorHandlerMiddleware from "./middlewares/error-handler.middleware";
 import Api from "./api";
+import logger from "./utils/logger.util.js";
 
-
-const { CORS, DISABLE_REQUEST_LOG } = config;
+const { DISABLE_REQUEST_LOG } = config;
 
 class App {
 
@@ -47,7 +47,14 @@ class App {
 
   _setRequestLogger() {
     if (DISABLE_REQUEST_LOG !== "1") {
-      this.app.use(morgan("dev"));
+      this.app.use(
+        morgan(
+          ':method :url :status :res[content-length] - :response-time ms',
+          {
+            stream: logger.stream
+          }
+        )
+      );
     }
   }
 
@@ -65,7 +72,6 @@ class App {
     );
   }
 
-
   _setRequestParser() {
     this.app.use(bodyParser.json());
     const options = { limit: "200mb", extended: false };
@@ -81,13 +87,10 @@ class App {
     this.app.use("/api/v1", Api);
   }
 
-  /**
-   * @private
-   * @description 
-   */
   _setErrorHandler() {
     this.app.use(ErrorHandlerMiddleware.init);
   }
+  
 }
 
 export default new App();

@@ -1,6 +1,6 @@
 import crypto from 'crypto'
 
-export default function createArticle (arg1,arg2,arg3) {
+export default function createArticle (arg1, arg2, arg3) {
     const arg4 = Math.floor(1000 + Math.random() * 9000);
     let input = `${arg1}${arg2}${arg3}${arg4}`
 

@@ -1,11 +1,8 @@
-
 import Schemes from "./schemes/validation.schemes";
 
 const schemes = new Schemes();
 
-
 export default class Validation {
-  
   static loginValidate(req, res, next) {
     const { error } = schemes.LoginScheme.validate(req.body, { abortEarly: false });
     if (error) {
@@ -19,6 +16,4 @@ export default class Validation {
     next();
   }
 
- 
-    
 }

@@ -4,13 +4,19 @@ import HttpStatusCodesUtil from './http-status-codes.util';
 const { ResourceNotFoundError } = ErrorsUtil;
 
 export default class SuccessHandlerUtil {
+  static _sendResponse(response, status, data) {
+    if (
+      status === HttpStatusCodesUtil.NO_CONTENT ||
+      typeof data === "undefined"
+    ) {
+      return response.status(status).send();
+    }
+
+    return response.status(status).json(data);
+  }
   
   static handleTokenVerification(response, next, result) {
     return SuccessHandlerUtil._sendResponse(response, HttpStatusCodesUtil.OK, result);
-  }
-
-  static _sendResponse(response, status, data) {
-    response.status(status).json(data);
   }
 
   static handleList(res, next, result) {
@@ -21,7 +27,6 @@ export default class SuccessHandlerUtil {
     if (!result) {
       return SuccessHandlerUtil._sendResponse(response, HttpStatusCodesUtil.NO_CONTENT);
     }
-
     return SuccessHandlerUtil._sendResponse(response, HttpStatusCodesUtil.CREATED, result);
   }
 

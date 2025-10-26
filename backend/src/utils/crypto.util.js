@@ -6,7 +6,6 @@ export default class CryptoUtil {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
   }
 
-
   static isValidPassword(password, hashPassword) {
     return bcrypt.compareSync(password, hashPassword);
   }

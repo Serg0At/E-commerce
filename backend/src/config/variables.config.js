@@ -1,15 +1,13 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import 'dotenv/config';
 
 const config = {
   ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
-  PORT: process.env.PORT || 3040,
+  ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+  PORT: process.env.PORT,
   ONE_WAY_HASH_SECRET: process.env.ONE_WAY_HASH_SECRET,
   DISABLE_REQUEST_LOG: process.env.DISABLE_REQUEST_LOG,
   CORS: process.env.CORS?.split(',') || '*',
-
-
-
+  LOG_LEVEL: process.env.LOG_LEVEL || 'info',
   
   PSQL: {
     URL: process.env.PSQL_URL,
@@ -19,31 +17,6 @@ const config = {
     DATABASE: process.env.PSQL_DATABASE,
     PASSWORD: process.env.PSQL_PASSWORD 
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   AUTH: {
     JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET,
     ACCESS_TOKEN_ACTIVE_TIME: process.env.ACCESS_TOKEN_ACTIVE_TIME || '12h',

@@ -29,18 +29,17 @@ const config = {
      APP_PASSWORD : process.env.APP_PASSWORD
   },
 
+  DOMAINS: {
+    DOMAIN: process.env.DOMAIN
+  },
 
-  // DOMAINS: {
-  //   DOMAIN: process.env.DOMAIN
-  // },
-
-  // WALLET_CONNECT : {
+  WALLET_CONNECT : {
     
-  // },
+  },
 
-  // PAYMENTS : {
-  //   PAYMENTS_API_KEY: process.env.PAYMENTS_API_KEY
-  // }
+  PAYMENTS : {
+    PAYMENTS_API_KEY: process.env.PAYMENTS_API_KEY
+  }
 };
 
 export default config;

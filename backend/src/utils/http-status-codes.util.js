@@ -43,7 +43,7 @@ const HTTP_STATUS_CODES = {
   UNSUPPORTED_MEDIA_TYPE: 415,
   RANGE_NOT_SATISFIABLE: 416,
   EXPECTATION_FAILED: 417,
-  IM_A_TEAPOT: 418, // ☕ fun one
+  IM_A_TEAPOT: 418,
   UNPROCESSABLE_ENTITY: 422,
   LOCKED: 423,
   FAILED_DEPENDENCY: 424,
@@ -69,52 +69,4 @@ const HTTP_STATUS_CODES = {
   NETWORK_AUTHENTICATION_REQUIRED: 511
 };
 
-// Reverse mapping: number → name
-const STATUS_NAMES = Object.fromEntries(
-  Object.entries(HTTP_STATUS_CODES).map(([key, value]) => [value, key])
-);
-
-// Helpers 🔧
-const isInformational = code => code >= 100 && code < 200;
-const isSuccess = code => code >= 200 && code < 300;
-const isRedirect = code => code >= 300 && code < 400;
-const isClientError = code => code >= 400 && code < 500;
-const isServerError = code => code >= 500 && code < 600;
-
-// Quick Response
-const makeResponse = (code, message, data = null) => ({
-  status: code,
-  message: message || STATUS_NAMES[code] || "Unknown Status",
-  data
-});
-
-// Common responses
-const RESPONSES = {
-  OK: makeResponse(HTTP_STATUS_CODES.OK, "Success"),
-  CREATED: makeResponse(HTTP_STATUS_CODES.CREATED, "Resource created"),
-  BAD_REQUEST: makeResponse(HTTP_STATUS_CODES.BAD_REQUEST, "Invalid request"),
-  UNAUTHORIZED: makeResponse(HTTP_STATUS_CODES.UNAUTHORIZED, "Unauthorized"),
-  FORBIDDEN: makeResponse(HTTP_STATUS_CODES.FORBIDDEN, "Access denied"),
-  NOT_FOUND: makeResponse(HTTP_STATUS_CODES.NOT_FOUND, "Resource not found"),
-  INTERNAL_ERROR: makeResponse(HTTP_STATUS_CODES.INTERNAL_SERVER_ERROR, "Server error")
-};
-
-export {
-  HTTP_STATUS_CODES,
-  STATUS_NAMES,
-  isInformational,
-  isSuccess,
-  isRedirect,
-  isClientError,
-  isServerError,
-  makeResponse,
-  RESPONSES
-};
-
-const HttpStatusCodesUtil = HTTP_STATUS_CODES;
-
-export default HttpStatusCodesUtil;
-
-// 🔚 Usage example:
-// import { HTTP_STATUS_CODES, makeResponse, isSuccess }
-// res.status(HTTP_STATUS_CODES.CREATED).json(makeResponse(201, "User created", user));
+export default HTTP_STATUS_CODES

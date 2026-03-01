@@ -337,6 +337,6 @@ For issues or questions, please contact the development team or create an issue 
 
 ---
 
-**Author**: Engined AM  
+**Author**: Serg 
 **Version**: 1.0.0  
-**Description**: CITY E-Commerce Platform Backend
+**Description**: E-Commerce Platform Backend

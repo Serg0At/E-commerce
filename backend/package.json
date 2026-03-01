@@ -1,7 +1,7 @@
 {
   "name": "site",
   "version": "1.0.0",
-  "description": "CITY",
+  "description": "Mangal",
   "scripts": {
     "start": "babel-watch src/bin/www.js",
     "migrate-down": "babel-watch migrations/drop_tables.js",
@@ -12,7 +12,7 @@
     "lint-no-fix": "eslint src/",
     "lint": "eslint --fix src/"
   },
-  "author": "Engined AM",
+  "author": "Serg",
   "devDependencies": {
     "concurrently": "^8.2.2",
     "eslint": "^7.9.0",
